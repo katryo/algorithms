@@ -16,7 +16,7 @@ def kmp(text, pattern):
 
     cur = 0
     ptn_p = 0
-    while cur <= len(text) and ptn_p < len(pattern):
+    while cur < len(text) and ptn_p < len(pattern):
         if text[cur] == pattern[ptn_p]:
             cur += 1
             ptn_p += 1
@@ -34,12 +34,10 @@ def bmh(text, pattern):
     length = len(pattern)
     for i, char in enumerate(pattern):
         table[char] = length - i - 1
-    if table[pattern[-1]] == 0:
-        table[pattern[-1]] = length
 
     def count_to_move(text_rightmost):
         if text_rightmost in table:
-            return table[text_rightmost]
+            return max(1, table[text_rightmost])
         else:
             return length
 
@@ -69,13 +67,12 @@ def bm(text, pattern):
 
     cur = 0
     while cur <= len(text)-len(pattern):
-        # cur_end = cur + len(pattern) - 1
         found = True
         for i in range(len(pattern)-1, -1, -1):
             if text[cur+i] != pattern[i]:
                 found = False
                 if text[cur+i] in table:
-                    cur += table[text[cur+i]]
+                    cur += max(1, table[text[cur+i]])
                 else:
                     cur += length
                 break
@@ -99,19 +96,12 @@ def naive(text, pattern):
 
 
 if __name__ == '__main__':
-    text = 'penpineappleapplepen'
-    pattern = 'apple'
+    text = 'abcabcabcdabc'
+    pattern = 'abcdabc'
     print(naive(text, pattern))
     print(bm(text, pattern))
     print(bmh(text, pattern))
     print(kmp(text, pattern))
-    #
-    pattern = 'plea'
-    print(naive(text, pattern))
-    print(bm(text, pattern))
-    print(bmh(text, pattern))
-    print(kmp(text, pattern))
-    # print(kmp('kkabcabdaa', 'abcabd'))
 
 
 
