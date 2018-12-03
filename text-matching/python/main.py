@@ -96,12 +96,9 @@ def naive(text, pattern):
 
 
 if __name__ == '__main__':
-    text = 'abcabcabcdabc'
-    pattern = 'abcdabc'
-    print(naive(text, pattern))
-    print(bm(text, pattern))
-    print(bmh(text, pattern))
-    print(kmp(text, pattern))
-
-
-
+    # text = 'abcabcabcdabc'
+    # pattern = 'abcdabc'
+    # print(naive(text, pattern))
+    # print(bm(text, pattern))
+    # print(bmh(text, pattern))
+    # print(kmp(text, pattern))
