@@ -5,17 +5,15 @@ class BloomFilter:
         self.array = [0] * self.size
 
     def add(self, string):
-        hashed = hash(string)
         for i in range(self.k):
-            val = i + hashed
-            idx = val % self.size
+            hashed = hash(string + str(i))
+            idx = hashed % self.size
             self.array[idx] = 1
 
     def has(self, string):
-        hashed = hash(string)
         for i in range(self.k):
-            val = i + hashed
-            idx = val % self.size
+            hashed = hash(string + str(i))
+            idx = hashed % self.size
             if self.array[idx] == 0:
                 return False
         return True
